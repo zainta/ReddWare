@@ -2,11 +2,11 @@
 // Licensed under the MIT License, (the "License"); you may not use this file except in compliance with the License. 
 // You may obtain a copy of the License at https://mit-license.org/
 
-using HDDL.Language.Json.Reflection;
+using ReddWare.Language.Json.Reflection;
 using System.Reflection;
 using System.Text;
 
-namespace HDDL.Language.Json.Conversion
+namespace ReddWare.Language.Json.Conversion
 {
     /// <summary>
     /// Stores an object and its actual type
@@ -16,7 +16,7 @@ namespace HDDL.Language.Json.Conversion
         /// <summary>
         /// The kind of object stored
         /// </summary>
-        public Type Kind { get; set; }
+        public Type? Kind { get; set; }
 
         /// <summary>
         /// The value stored
@@ -30,6 +30,8 @@ namespace HDDL.Language.Json.Conversion
         /// <exception cref="ArgumentException" />
         public ValueTypeQuantity(object obj)
         {
+            if (obj == null) throw new ArgumentException("Null object provided.");
+
             JsonContainerName = "ValueTypeQuantity";
             Value = obj;
             Kind = obj?.GetType();
@@ -42,6 +44,9 @@ namespace HDDL.Language.Json.Conversion
         /// <param name="obj">The instance of the object the property should be pulled from</param>
         public ValueTypeQuantity(PropertyInfo prop, object obj)
         {
+            if (prop == null) throw new ArgumentException("Null property provided.");
+            if (obj == null) throw new ArgumentException("Null object target provided.");
+
             JsonContainerName = "ValueTypeQuantity";
             Value = prop.GetValue(obj);
             Kind = prop.PropertyType;

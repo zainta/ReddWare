@@ -4,7 +4,7 @@
 
 using System.Collections.Concurrent;
 
-namespace HDDL.Threading
+namespace ReddWare.Threading
 {
     /// <summary>
     /// Provides a means of evenly distributing work among a set number of threads in a safe manner

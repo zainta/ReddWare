@@ -4,7 +4,7 @@
 
 using System.Collections.Concurrent;
 
-namespace HDDL.Collections
+namespace ReddWare.Collections
 {
     /// <summary>
     /// Implements a caching system where items can expire and will automatically be disposed of when they do

@@ -5,7 +5,7 @@
 using System.Collections;
 using System.Text;
 
-namespace HDDL.Language.Json.Conversion
+namespace ReddWare.Language.Json.Conversion
 {
     /// <summary>
     /// Stores json enumerations' properties

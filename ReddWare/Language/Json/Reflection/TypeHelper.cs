@@ -2,13 +2,13 @@
 // Licensed under the MIT License, (the "License"); you may not use this file except in compliance with the License. 
 // You may obtain a copy of the License at https://mit-license.org/
 
-using HDDL.Collections;
-using HDDL.Language.Json.Conversion;
+using ReddWare.Collections;
+using ReddWare.Language.Json.Conversion;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace HDDL.Language.Json.Reflection
+namespace ReddWare.Language.Json.Reflection
 {
     /// <summary>
     /// Provides static helper methods for reflection-related tasks

@@ -4,7 +4,7 @@
 
 using System.Text;
 
-namespace HDDL.Language.Json.Conversion
+namespace ReddWare.Language.Json.Conversion
 {
     /// <summary>
     /// Root class for all json storage classes

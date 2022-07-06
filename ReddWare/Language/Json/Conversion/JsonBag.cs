@@ -2,10 +2,10 @@
 // Licensed under the MIT License, (the "License"); you may not use this file except in compliance with the License. 
 // You may obtain a copy of the License at https://mit-license.org/
 
-using HDDL.Language.Json.Reflection;
+using ReddWare.Language.Json.Reflection;
 using System.Text;
 
-namespace HDDL.Language.Json.Conversion
+namespace ReddWare.Language.Json.Conversion
 {
     /// <summary>
     /// Stores json objects' properties
