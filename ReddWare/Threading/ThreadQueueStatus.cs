@@ -7,7 +7,7 @@ namespace ReddWare.Threading
     /// <summary>
     /// Represents the possible states of a ThreadedQueue
     /// </summary>
-    enum ThreadQueueStatus
+    public enum ThreadQueueStatus
     {
         /// <summary>
         /// The ThreadedQueue is not currently running

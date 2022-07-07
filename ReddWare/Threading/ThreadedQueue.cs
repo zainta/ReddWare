@@ -9,7 +9,7 @@ namespace ReddWare.Threading
     /// <summary>
     /// Provides a means of evenly distributing work among a set number of threads in a safe manner
     /// </summary>
-    class ThreadedQueue<T> where T : class
+    public class ThreadedQueue<T> where T : class
     {
         /// <summary>
         /// The number of threads the ThreadedQueue is supposed to use

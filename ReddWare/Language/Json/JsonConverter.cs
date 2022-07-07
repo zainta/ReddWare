@@ -9,7 +9,7 @@ namespace ReddWare.Language.Json
     /// <summary>
     /// Static class to handle the translation to and from Json of Outcome classes.
     /// </summary>
-    static class JsonConverter
+    public static class JsonConverter
     {
         /// <summary>
         /// Formats the json string for easy viewing

@@ -11,7 +11,7 @@ namespace ReddWare.Collections
     /// </summary>
     /// <typeparam name="ContentType">The type being cached</typeparam>
     /// <typeparam name="KeyType">The key type used to refer to it</typeparam>
-    class ExpiringCache<KeyType, ContentType> : IDisposable 
+    public class ExpiringCache<KeyType, ContentType> : IDisposable 
     {
         /// <summary>
         /// The actual cache

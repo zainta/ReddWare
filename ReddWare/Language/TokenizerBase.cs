@@ -11,7 +11,7 @@ namespace ReddWare.Language
     /// Base tokenizer class implementation to alleviate copy duplication across tokenizers
     /// </summary>
     /// <typeparam name="TokenType">The type of token produced and stored by the process (e.g the actual tokens)</typeparam>
-    abstract class TokenizerBase<TokenType>
+    public abstract class TokenizerBase<TokenType>
     {
         protected int Minimum_Column = 1;
         protected int Minimum_Row = 1;
