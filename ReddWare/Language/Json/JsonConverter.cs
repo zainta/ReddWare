@@ -23,7 +23,7 @@ namespace ReddWare.Language.Json
         }
 
         /// <summary>
-        /// Takes an HDSLOutcome instance, or derived instance, and returns it as JSON.
+        /// Takes an object and returns it as JSON.
         /// </summary>
         /// <param name="obj">The object to convert</param>
         /// <param name="appendTypeAnnotation">Whether or not JSON should include the $type property</param>
