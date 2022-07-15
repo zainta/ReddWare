@@ -28,17 +28,17 @@ Provides a command line argument parsing system for easy consumption of applicat
 Usage:
 The following example defines a parameter handler, adds the argument rules to it, and then combs through a list of arguments for the first match to each of those rules.  All arguments that do not match rules are returned by `ph.Comb(args);`.
 
-`ParameterHandler ph = new ParameterHandler();
-ph.AddRules(
-    new ParameterRuleOption("help", true, true, null, "-"),
-    new ParameterRuleShortcut("ex"),
-    new ParameterRuleFlag(new FlagDefinition[] {
-        new FlagDefinition('e', true, true),
-        new FlagDefinition('c', true, true),
-        new FlagDefinition('s', true, false), 
-        new FlagDefinition('r', true, true) }, "-")
-    );
-ph.Comb(args);`
+`ParameterHandler ph = new ParameterHandler();`
+`ph.AddRules(`
+    `new ParameterRuleOption("help", true, true, null, "-"),`
+    `new ParameterRuleShortcut("ex"),`
+    `new ParameterRuleFlag(new FlagDefinition[] {`
+        `new FlagDefinition('e', true, true),`
+        `new FlagDefinition('c', true, true),`
+        `new FlagDefinition('s', true, false),` 
+        `new FlagDefinition('r', true, true) }, "-")`
+    `);`
+`ph.Comb(args);`
 
 In the above example, all three argument types are used:
   * `ParameterRuleOption` is used to define command line options.  In the example, the option defined is `-help: <params>`, where <params> is a comma seperated list of items.
@@ -57,12 +57,12 @@ Usage:
 There are two basic ways of loading ini files: `IniFileManager.Discover` will look through an ini file and load everything it finds while `IniFileManager Explore` takes in an expected structure with default values and searches through the target file, populating what matches its provided structuring, adding what doesn't, and using default values for things that aren't found.  Ini files are stored in the resulting ini file manager through use of a key, allowing multiple files to be loaded and handled by a single manager.
 
 In the following example, a file is explored.  
-`var manager = IniFileManager.Explore(Ini_File_Location, true, false, false,
-    new IniSubsection("HDSL_DB", null,
-        new IniValue("DatabaseLocation", defaultValue: "file database.db")),
-    new IniSubsection("HDSL_Web", null,
-        new IniValue("BroadcastSources", defaultValue: null),
-        new IniValue("TryExecuteRemotely", defaultValue: "False")));`
+`var manager = IniFileManager.Explore(Ini_File_Location, true, false, false,`
+    `new IniSubsection("HDSL_DB", null,`
+        `new IniValue("DatabaseLocation", defaultValue: "file database.db")),`
+    `new IniSubsection("HDSL_Web", null,`
+        `new IniValue("BroadcastSources", defaultValue: null),`
+        `new IniValue("TryExecuteRemotely", defaultValue: "False")));`
         
 In the above example, the exploration searches the provided path, adds all newly discovered items, does not throw schema mismatch exceptions, and stores the resulting ini structure using the full path as the key, instead of just the file name.
 
