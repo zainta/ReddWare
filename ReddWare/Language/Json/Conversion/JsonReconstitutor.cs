@@ -308,8 +308,6 @@ namespace ReddWare.Language.Json.Conversion
         /// <returns></returns>
         private bool EvaluateItem(JsonArray ja, Type type = null, bool runningInParallel = false)
         {
-            if (ja.ConvertTarget != null) return true;
-
             var result = false;
             var key = ja.GetKeyString();
 
@@ -339,6 +337,9 @@ namespace ReddWare.Language.Json.Conversion
                     }
                 }
             }
+
+            // if we have a preset type then skip self determination
+            if (ja.ConvertTarget != null) return true;
 
             // only continue the type assessment if all children successfully assessed themselves
             if (!childSuccesses.Where(cs => !cs).Any())
