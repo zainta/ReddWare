@@ -75,7 +75,7 @@ namespace ReddWare.Language.Json.Conversion
         /// <param name="contentItemCount">The number of content items will be stored in the json object/array</param>
         protected void ProperlyAddType(StringBuilder sb, Type type, int contentItemCount)
         {
-            var typeName = type.FullName;
+            var typeName = type.AssemblyQualifiedName;
 
             sb.Append($"\"$type\":\"{typeName}\"");
             if (contentItemCount > 0)

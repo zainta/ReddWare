@@ -87,7 +87,14 @@ namespace ReddWare.Language.Json.Conversion
         {
             if (Evaluate(jb, null))
             {
-                return Convert(jb);
+                try
+                {
+                    return jb.AsObject();
+                }
+                catch (Exception ex)
+                {
+                    throw new JsonConversionException("An error was encountered during the deserialization process.", ex);
+                }
             }
             else
             {

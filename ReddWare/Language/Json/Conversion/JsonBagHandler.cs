@@ -125,47 +125,6 @@ namespace ReddWare.Language.Json.Conversion
 
         #endregion
 
-        #region Jsonification
-
-        /// <summary>
-        /// Converts the provided object into json
-        /// </summary>
-        /// <param name="obj">The jsonbase to convert</param>
-        /// <param name="appendTypeProperty">Whether or not JSON should include the $type property</param>
-        /// <returns>The resulting json string</returns>
-        //internal static string GetJson(JsonBase obj, bool appendTypeProperty)
-        //{
-        //    if (obj is null)
-        //    {
-        //        return null;
-        //    }
-        //    else if (obj is IConvertible || obj is Guid)
-        //    {
-        //        return GetSingleJson(obj, appendTypeProperty);
-        //    }
-        //    else if (obj is IList)
-        //    {
-        //        return GetArrayJson((IList)obj, appendTypeProperty);
-        //    }
-        //    else
-        //    {
-        //        return GetBagJson(obj, appendTypeProperty);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Converts a single value into a json string
-        ///// </summary>
-        ///// <param name="o">The value to convert</param>
-        ///// <param name="appendTypeProperty">Whether or not JSON should include the $type property</param>
-        ///// <returns>Returns a json string for a single item array</returns>
-        //private static string GetSingleJson(object o, bool appendTypeProperty)
-        //{
-        //    return GetArrayJson(new object[] { o }, appendTypeProperty);
-        //}
-
-        #endregion
-
         #region Rebagification
 
         /// <summary>
@@ -232,7 +191,8 @@ namespace ReddWare.Language.Json.Conversion
 
                 while (tokens.Peek().Type == JsonTokenTypes.SquareOpen ||
                     tokens.Peek().Type == JsonTokenTypes.CurlyOpen ||
-                    tokens.Peek().Type == JsonTokenTypes.TypeAnnotation)
+                    tokens.Peek().Type == JsonTokenTypes.TypeAnnotation ||
+                    tokens.Peek().Family == JsonTokenFamilies.Value)
                 {
                     if (tokens.Peek().Type == JsonTokenTypes.CurlyOpen)
                     {

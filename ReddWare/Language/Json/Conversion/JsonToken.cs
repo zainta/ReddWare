@@ -116,7 +116,7 @@ namespace ReddWare.Language.Json.Conversion
 
         public override string ToString()
         {
-            return $"['{Code}', '{Literal}', {Type} - ({Column}, {Row})]";
+            return $"'{Code}', '{Literal}', {Type} - ({Column}, {Row})";
         }
     }
 }
