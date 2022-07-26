@@ -130,11 +130,9 @@ namespace ReddWare.IO.Disk
         private static void SafelyAdd(ConcurrentDictionary<int, List<string>> target, string path, bool isFile)
         {
             var level = GetDependencyCount(path, isFile);
-            while (target.Count < level)
-            {
-                target.TryAdd(level, new List<string>());
-            }
+            target.TryAdd(level, new List<string>());
             target[level].Add(path);
+            target[level].Sort(new PathDependencyDepthComparer());
         }
 
         /// <summary>
@@ -324,7 +322,7 @@ namespace ReddWare.IO.Disk
                     {
                         recursor(path, allFiles, allDirectories);
                     }
-                }, threads);
+                }, 1);
             tq.Start(uniqueTargets);
             tq.WaitAll();
 
