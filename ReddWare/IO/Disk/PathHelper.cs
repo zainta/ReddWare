@@ -207,9 +207,10 @@ namespace ReddWare.IO.Disk
         /// Produces a flattened, hierarchically ordered list of paths from a folder and its subfolders
         /// </summary>
         /// <param name="paths">The paths to enumerate</param>
+        /// <param name="includeAnchor">Whether or not folders between the target and the root should be included</param>
         /// <param name="maxThreads">The maximum number of root threads to scan the disk with</param>
         /// <returns>Returns the sorted items (FileInfo and DirectoryInfo instances)</returns>
-        public static FileSystemInfo[] GetDirectoryStructureContentByDepth(IEnumerable<string> paths, int maxThreads = 4)
+        public static FileSystemInfo[] GetDirectoryStructureContentByDepth(IEnumerable<string> paths, bool includeAnchor, int maxThreads = 4)
         {
             var result = new List<FileSystemInfo>();
 
@@ -326,35 +327,38 @@ namespace ReddWare.IO.Disk
             tq.Start(uniqueTargets);
             tq.WaitAll();
 
-            // the directories must reach all the way to the root.
-            // check to see if each path parameter has 0 dependencies (i.e is a root path)
-            // if it isn't, then add its dependencies (this will include the root)
-            foreach (var path in paths)
+            if (includeAnchor)
             {
-                var anchors = AnchorPath(path)
-                    .Select((t) =>
-                    {
-                        t = EnsurePath(t);
-                        if (string.IsNullOrWhiteSpace(t))
+                // the directories must reach all the way to the root.
+                // check to see if each path parameter has 0 dependencies (i.e is a root path)
+                // if it isn't, then add its dependencies (this will include the root)
+                foreach (var path in paths)
+                {
+                    var anchors = AnchorPath(path)
+                        .Select((t) =>
                         {
-                            return null;
+                            t = EnsurePath(t);
+                            if (string.IsNullOrWhiteSpace(t))
+                            {
+                                return null;
+                            }
+
+                            return t;
+                        })
+                        .Where(t => !string.IsNullOrWhiteSpace(t));
+                    if (anchors.Count() > 0)
+                    {
+                        var allDirs = new List<string>();
+                        foreach (var key in allDirectories.Keys)
+                        {
+                            allDirs.AddRange(allDirectories[key]);
                         }
 
-                        return t;
-                    })
-                    .Where(t => !string.IsNullOrWhiteSpace(t));
-                if (anchors.Count() > 0)
-                {
-                    var allDirs = new List<string>();
-                    foreach (var key in allDirectories.Keys)
-                    {
-                        allDirs.AddRange(allDirectories[key]);
-                    }
-
-                    var nonDuplicates = anchors.Where(ap => !allDirs.Where(d => d == ap).Any());
-                    foreach (var item in nonDuplicates)
-                    {
-                        SafelyAdd(allDirectories, item, true);
+                        var nonDuplicates = anchors.Where(ap => !allDirs.Where(d => d == ap).Any());
+                        foreach (var item in nonDuplicates)
+                        {
+                            SafelyAdd(allDirectories, item, true);
+                        }
                     }
                 }
             }

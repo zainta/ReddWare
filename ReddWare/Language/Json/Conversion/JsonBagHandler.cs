@@ -239,6 +239,22 @@ namespace ReddWare.Language.Json.Conversion
                 issues.Add(new LogItemBase(tokens.Peek().Column, tokens.Peek().Row, "Array start '[' expected."));
             }
 
+            if (result.ConvertTarget != null &&
+                ((
+                    result.ConvertTarget.IsGenericType &&
+                    result.ConvertTarget.GetGenericArguments().First().GetInterfaces().Where(t => t == typeof(IConvertible)).Any()
+                ) ||
+                (
+                    !result.ConvertTarget.IsGenericType &&
+                    result.ConvertTarget.GetElementType().GetInterfaces().Where(t => t == typeof(IConvertible)).Any()
+                )))
+            {
+                foreach (var v in result.Values)
+                {
+                    v.SetType(result.ConvertTarget.GetElementType());
+                }
+            }
+
             return result;
         }
 
